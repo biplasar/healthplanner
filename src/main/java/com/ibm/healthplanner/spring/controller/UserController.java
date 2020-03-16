@@ -27,8 +27,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ibm.healthplanner.spring.bean.User;
 import com.ibm.healthplanner.spring.service.UserService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping(value={"/","/user"})
+@Api(value="onlinestore", description="Operations pertaining to Health Advisor")
 public class UserController {
 	@Autowired
 	UserService userService;
