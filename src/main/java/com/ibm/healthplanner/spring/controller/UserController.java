@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ibm.healthplanner.spring.bean.User;
+import com.ibm.healthplanner.spring.bean.CreatePatientResponse;
+import com.ibm.healthplanner.spring.bean.GetPatientResponse;
+import com.ibm.healthplanner.spring.bean.Patient;
 import com.ibm.healthplanner.spring.service.UserService;
 
 import io.swagger.annotations.Api;
-
 @RestController
+@CrossOrigin(origins="*")
 @RequestMapping(value={"/","/user"})
 @Api(value="onlinestore", description="Operations pertaining to Health Advisor")
 public class UserController {
@@ -50,17 +53,17 @@ public class UserController {
 	 */
     
 	 @PostMapping(value="/create",headers="Accept=application/json")
-	 public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder){
-	     System.out.println("Creating User "+user.getName());
-	     userService.createUser(user);
+	 public ResponseEntity<Void> createUser(@RequestBody Patient patient, UriComponentsBuilder ucBuilder){
+	     System.out.println("Creating User "+patient.getName());
+	     userService.createUser(patient);
 	     HttpHeaders headers = new HttpHeaders();
-	     headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+	     headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(patient.getId()).toUri());
 	     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	 }
 
 	 @GetMapping(value="/get", headers="Accept=application/json")
-	 public List<User> getAllUser() {	 
-	  List<User> tasks=userService.getUser();
+	 public GetPatientResponse getAllUser() {		 
+		GetPatientResponse tasks = userService.getAllUser();
 	  return tasks;
 	
 	 }

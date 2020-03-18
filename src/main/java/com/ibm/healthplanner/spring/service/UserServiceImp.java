@@ -1,5 +1,6 @@
 package com.ibm.healthplanner.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ibm.healthplanner.spring.bean.User;
+import com.ibm.healthplanner.spring.bean.CreatePatientResponse;
+import com.ibm.healthplanner.spring.bean.GetPatientResponse;
+import com.ibm.healthplanner.spring.bean.Patient;
 import com.ibm.healthplanner.spring.repository.UserRepository;
 
 @Service
@@ -16,14 +19,17 @@ public class UserServiceImp implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	public void createUser(User user) {
-		// TODO Auto-generated method stub
+	public void createUser(Patient user) {
+
 		userRepository.save(user);
 	}
 
-	public List<User> getUser() {
+	public GetPatientResponse getAllUser() {
 		// TODO Auto-generated method stub
-		return (List<User>) userRepository.findAll();
+		
+		GetPatientResponse data = new GetPatientResponse();
+		data.setPatients((List<Patient>) userRepository.findAll());
+		return data;
 	}
 
 	/*
@@ -33,10 +39,10 @@ public class UserServiceImp implements UserService {
 	 * }
 	 */
 
-	public User update(User user, String l) {
+	/*public Patient update(Patient user, String l) {
 		// TODO Auto-generated method stub
 		return userRepository.save(user);
-	}
+	}*/
 
 	/*
 	 * public void deleteUserById(String id) { // TODO Auto-generated method stub
