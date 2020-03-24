@@ -38,6 +38,7 @@ public class Patient  extends BaseEntity{
 	}
 	public Patient(PatientName name, PostalAddress address, String dateOfBirth, String mailId,
 			String phone, String maritalStatus, List<String> medHistory ){
+		super();
 		this.name = name;
 		this.address = address;
 		this.dateOfBirth = dateOfBirth;
