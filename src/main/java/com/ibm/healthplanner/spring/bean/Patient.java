@@ -24,7 +24,7 @@ public class Patient  extends BaseEntity{
 	private PostalAddress address;
 	
 	private String gender;
-	@JsonFormat(pattern="dd/mm/yyyy")
+	//@JsonFormat(pattern="dd/mm/yyyy")
 	private Date dateOfBirth;
 	
 	private String mailId;
