@@ -1,11 +1,13 @@
 package com.ibm.healthplanner.spring.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,7 +23,9 @@ public class Patient  extends BaseEntity{
 	@JsonProperty("postalAddress")
 	private PostalAddress address;
 	
-	private String dateOfBirth;
+	private String gender;
+	@JsonFormat(pattern="dd/mm/yyyy")
+	private Date dateOfBirth;
 	
 	private String mailId;
 	private String phone;
@@ -36,11 +40,12 @@ public class Patient  extends BaseEntity{
 	public Patient(){
 		
 	}
-	public Patient(PatientName name, PostalAddress address, String dateOfBirth, String mailId,
+	public Patient(PatientName name, PostalAddress address, String gender,Date dateOfBirth, String mailId,
 			String phone, String maritalStatus, List<String> medHistory ){
 		super();
 		this.name = name;
 		this.address = address;
+		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.mailId = mailId;
 		this.phone = phone;
@@ -60,10 +65,16 @@ public class Patient  extends BaseEntity{
 	public void setAddress(PostalAddress address) {
 		this.address = address;
 	}
-	public String getDateOfBirth() {
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getMailId() {
@@ -105,6 +116,7 @@ public class Patient  extends BaseEntity{
 	    
 	    sb.append("    name: ").append(toIndentedString(name)).append("\n");
 	    sb.append("    address: ").append(toIndentedString(address)).append("\n");
+	    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
 	    sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
 	    sb.append("    mailId: ").append(toIndentedString(mailId)).append("\n");
 	    sb.append("    phone: ").append(toIndentedString(phone)).append("\n");

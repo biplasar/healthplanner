@@ -4,7 +4,7 @@ package com.ibm.healthplanner.spring.controller;
 
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 
@@ -54,7 +54,7 @@ public class UserController {
     
 	 @PostMapping(value="/create",headers="Accept=application/json")
 	 public ResponseEntity<Void> createUser(@RequestBody Patient patient, UriComponentsBuilder ucBuilder){
-	     System.out.println("Creating User "+patient.getName());
+	     System.out.println("Creating User "+patient.getName().toString());
 	     String id = "P" + "-" + System.currentTimeMillis();
 	     patient.setId(id);
 	     userService.createUser(patient);
@@ -69,22 +69,32 @@ public class UserController {
 	  return tasks;
 	
 	 }
+	 @GetMapping(value="/get/{id}", headers="accept=application/json")
+	 public Optional<Patient> findPatientById(@PathVariable("id") String id){
+		 Optional<Patient> patient= userService.findPatientById(id);
+		 return patient;
+	 }
+	 
 
-	/*
-	 * @PutMapping(value="/update", headers="Accept=application/json") public
-	 * ResponseEntity<String> updateUser(@RequestBody User currentUser) {
-	 * System.out.println("sd"); User user =
-	 * userService.findById(currentUser.getId()); if (user==null) { return new
-	 * ResponseEntity<String>(HttpStatus.NOT_FOUND); }
-	 * userService.update(currentUser, currentUser.getId()); return new
-	 * ResponseEntity<String>(HttpStatus.OK); }
-	 * 
-	 * @DeleteMapping(value="/{id}", headers ="Accept=application/json") public
-	 * ResponseEntity<User> deleteUser(@PathVariable("id") String id){ User user =
-	 * userService.findById(id); if (user == null) { return new
-	 * ResponseEntity<User>(HttpStatus.NOT_FOUND); } userService.deleteUserById(id);
-	 * return new ResponseEntity<User>(HttpStatus.NO_CONTENT); }
-	 */
+	
+	  @PutMapping(value="/update/{id}", headers="Accept=application/json") 
+	  public ResponseEntity<Patient> updateUser(@RequestBody Patient currentUser,@PathVariable("id") String id) {
+	  
+		  System.out.println("Current UserId is : "+currentUser.getId());
+		  userService.update(currentUser, id);
+		  return new ResponseEntity<Patient>(HttpStatus.OK); 
+	  }
+	  
+	  @DeleteMapping(value="/delete/{id}", headers ="Accept=application/json") 
+	  public ResponseEntity<Patient> deleteUser(@PathVariable("id") String id){
+		  Optional<Patient> user = userService.findPatientById(id); 
+		  if (user == null) { 
+			  return new ResponseEntity<Patient>(HttpStatus.NOT_FOUND); 
+		  } 
+		  userService.deleteUserById(id);
+		  return new ResponseEntity<Patient>(HttpStatus.NO_CONTENT); 
+	  }
+	 
 	/*
 	 * @PatchMapping(value="/{id}", headers="Accept=application/json") public
 	 * ResponseEntity<User> updateUserPartially(@PathVariable("id") String

@@ -45,6 +45,21 @@ public class PatientName {
 		this.lastName = lastName;
 	}
 	
+	@Override
+    public String toString() {
+		StringBuilder sb = new StringBuilder();
+	    sb.append("class PatientName {\n");
+	    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+	    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+	    sb.append("}");
+	    return sb.toString();
+    }
 	
+	private String toIndentedString(java.lang.Object o) {
+	    if (o == null) {
+	      return "null";
+	    }
+	    return o.toString().replace("\n", "\n    ");
+	  }
 
 }
