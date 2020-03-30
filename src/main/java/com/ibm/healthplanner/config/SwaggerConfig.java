@@ -1,4 +1,4 @@
-package com.ibm.healthplanner.spring.config;
+package com.ibm.healthplanner.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     public Docket healthApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ibm.healthplanner.spring.controller"))
-                .paths(regex("/user.*"))
+                .apis(RequestHandlerSelectors.basePackage("com.ibm.healthplanner.controller"))
+                .paths(regex("/healthplanner.*"))
                 .build()
                 .apiInfo(metaData());
     }

@@ -1,13 +1,16 @@
-package com.ibm.healthplanner.spring.bean;
+package com.ibm.healthplanner.model;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +18,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @SuppressWarnings("serial")
 @Document(collection = "patients")
+//@JsonIgnoreProperties(value = { "dateOfBirth" })
 public class Patient  extends BaseEntity{
-
+	
+	//private String id;
 	@JsonProperty("patientName")
 	private PatientName name;
 	
@@ -24,7 +29,10 @@ public class Patient  extends BaseEntity{
 	private PostalAddress address;
 	
 	private String gender;
+	
 	//@JsonFormat(pattern="dd/mm/yyyy")
+	//@DateTimeFormat(iso=ISO.DATE_TIME)
+	//@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date dateOfBirth;
 	
 	private String mailId;
@@ -42,6 +50,7 @@ public class Patient  extends BaseEntity{
 	}
 	public Patient(PatientName name, PostalAddress address, String gender,Date dateOfBirth, String mailId,
 			String phone, String maritalStatus, List<String> medHistory ){
+		
 		super();
 		this.name = name;
 		this.address = address;
@@ -57,7 +66,7 @@ public class Patient  extends BaseEntity{
 	}
 	public void setName(PatientName name) {
 		this.name = name;
-		System.out.println("PatientName : "+name.toString() +"FirstName: "+name.getFirstName());
+		//System.out.println("PatientName : "+name.toString() +"FirstName: "+name.getFirstName());
 	}
 	public PostalAddress getAddress() {
 		return address;
@@ -101,6 +110,7 @@ public class Patient  extends BaseEntity{
 	public void setMedHistory(List<String> medHistory) {
 		this.medHistory = medHistory;
 	}
+	
 	
 	private String toIndentedString(java.lang.Object o) {
 	    if (o == null) {

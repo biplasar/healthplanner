@@ -1,4 +1,4 @@
-package com.ibm.healthplanner.spring.bean;
+package com.ibm.healthplanner.model;
 
 import java.util.ArrayList;
 import java.util.List;

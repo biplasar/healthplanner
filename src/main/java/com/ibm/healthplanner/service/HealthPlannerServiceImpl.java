@@ -1,4 +1,4 @@
-package com.ibm.healthplanner.spring.service;
+package com.ibm.healthplanner.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,39 +7,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ibm.healthplanner.spring.bean.GetPatientResponse;
-import com.ibm.healthplanner.spring.bean.Patient;
-import com.ibm.healthplanner.spring.repository.UserRepository;
+import com.ibm.healthplanner.model.GetPatientResponse;
+import com.ibm.healthplanner.model.Patient;
+import com.ibm.healthplanner.repository.HealthPlannerRepository;
 
 @Service
 @Transactional
-public class UserServiceImp implements UserService {
+public class HealthPlannerServiceImpl implements HealthPlannerService {
 	@Autowired
-	UserRepository userRepository;
+	HealthPlannerRepository userRepository;
 
 	public void createUser(Patient user) {
-
+		
+		System.out.println("Date is :"+user.getDateOfBirth());	
 		userRepository.save(user);
 	}
 
 	public GetPatientResponse getAllUser() {
-		// TODO Auto-generated method stub
 		
-		GetPatientResponse data = new GetPatientResponse();
-		data.setPatients((List<Patient>) userRepository.findAll());
-		return data;
+		GetPatientResponse patietData = new GetPatientResponse();
+		patietData.setPatients((List<Patient>) userRepository.findAll());
+		return patietData;
 	}
 
 	
-	 public Optional<Patient> findPatientById(String id) { // TODO Auto-generated method
-		  return userRepository.findById(id);  
+	 public Optional<Patient> findPatientById(String id) { 
+		  return userRepository.findById(id); 
 	  }
 
 	public void update(Patient newPatient, String id) {
+		
 		Optional<Patient> patient = findPatientById(newPatient.getId()); 
 		Patient ptn = new Patient();
 		  if(patient.isPresent()) {
 			  ptn = patient.get();
+			  ptn.setId(newPatient.getId());
 			  ptn.setName(newPatient.getName());
 			  ptn.setAddress(newPatient.getAddress());
 			  ptn.setGender(newPatient.getGender());
@@ -51,20 +53,13 @@ public class UserServiceImp implements UserService {
 		  }
 		
 		 userRepository.save(ptn);
-		//return userRepository.save(user);
+		
 	}
 
 	
-	  public void deleteUserById(String id) { // TODO Auto-generated method stub
+	  public void deleteUserById(String id) { 
 		  userRepository.deleteById(id);
 	  }
 	 
-	/*
-	 * public User updatePartially(User user, String id) { // TODO Auto-generated
-	 * method stub User usr = findById(id); usr.setCountry(user.getCountry());
-	 * return userRepository.save(usr); }
-	 */
-
-
-
+	
 }
