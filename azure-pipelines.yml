@@ -16,7 +16,7 @@ steps:
     method: 'GET'
     headers: |
       {
-      "Authorization": "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A"
+      "Authorization": "Bearer $(token)"
       }
     urlSuffix: '/repositories'
     waitForCompletion: 'false'
