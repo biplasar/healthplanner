@@ -18,4 +18,15 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    serviceConnection: 'Embold'
+    method: 'POST'
+    headers: |
+      {
+      "AuthToken": "Bearer $(Token)"
+      }
+    urlSuffix: '/repositories/128770b54001a3481c9747ed80b89afe/scan'
+    waitForCompletion: 'false'
   
