@@ -17,14 +17,5 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-# Invoke REST API v1
-# Invoke a REST API as a part of your pipeline. 
-- task: InvokeRESTAPI@1
-  inputs:
-    connectionType: 'connectedServiceName'
-    serviceConnection: 'http://sipembold.eastus.cloudapp.azure.com:3000/api/v1'
-    method: 'POST'
-    headers: '"AuthToken" : "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A"'
-    urlSuffix: '/repositories/128770b54001a3481c9747ed80b89afe/scan'
-    waitForCompletion: 'false'
+
   
