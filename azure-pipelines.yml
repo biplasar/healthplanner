@@ -13,11 +13,11 @@ steps:
   inputs:
     connectionType: 'connectedServiceName'
     serviceConnection: 'Embold'
-    method: 'POST'
+    method: 'GET'
     headers: |
       {
       "AuthToken": "Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY4MDYwMDQ4MDkzMCwiaWF0IjoxNjgwNjAwNDgwfQ.5-RIW5VrXEZ_bYuWDu1zL0DuNljZWVIgrHOMYcm8mlCgsnFhqDh8tBx48kUKcOthdpv8b5m0JVoQAsjcpqxT-A"
       }
-    urlSuffix: '/repositories/128770b54001a3481c9747ed80b89afe/scan'
+    urlSuffix: '/repositories'
     waitForCompletion: 'false'
   
