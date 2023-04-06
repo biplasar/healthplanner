@@ -16,7 +16,7 @@ steps:
     method: 'GET'
     headers: |
       {
-      "AuthToken": "$(system.AccessToken)"
+      "AuthToken": "$(EMBOLDTOKEN)"
       }
     urlSuffix: '/repositories'
     waitForCompletion: 'false'
