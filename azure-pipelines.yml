@@ -16,7 +16,7 @@ steps:
     method: 'GET'
     headers: |
       {
-      "Authorization": "Bearer $(token)"
+      "AuthToken": "$(system.AccessToken)"
       }
     urlSuffix: '/repositories'
     waitForCompletion: 'false'
